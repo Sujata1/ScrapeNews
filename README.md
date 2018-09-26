@@ -1,4 +1,4 @@
-# ScrapteNews
+# ScrapeNews
 
 Create an app that accomplishes the following:
 
