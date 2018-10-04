@@ -91,7 +91,7 @@ router.get("/api/notes/:id", function (req, res) {
 router.post("/api/savearticle", function (req, res) {
   db.Article.findOneAndUpdate({ link: req.body.link }, { $set: { "saved": req.body.saved } })
     .then(function (dbArticle) {
-      res.redirect("/");
+      res.redirect("/index");
     })
     .catch(function (err) {
       res.json(err);
