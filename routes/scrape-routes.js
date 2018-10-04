@@ -36,7 +36,7 @@ router.get("/api/scrape", function (req, res) {
       });
     });
     console.log("scrape comepleted");
-    res.redirect("/");
+    res.redirect("/index");
 
   });
 });
@@ -102,7 +102,7 @@ router.get("/api/clear/notSaved", function (req, res) {
   console.log("enter clear all");
   db.Article.remove({ saved: false })
     .then(function (dbArticle) {
-      res.redirect('/');
+      res.redirect('/index');
     })
 });
 
@@ -110,7 +110,7 @@ router.get("/api/clear/saved", function (req, res) {
   console.log("enter clear saved");
   db.Article.updateMany({ saved: true }, { $set: { "saved": false } })
     .then(function (dbArticle) {
-      res.redirect('/');
+      res.redirect('/index');
     })
 });
 
