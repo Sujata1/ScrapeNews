@@ -20,7 +20,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 //Create all our routes and set up logic within those routes where required.
 
-router.get('/index', function (req, res) {
+router.get('/', function (req, res) {
     console.log("enter index in html-router");
     db.Article.find({ saved: false })
     .then(function (dbArticle) {
