@@ -5,8 +5,10 @@ var request = require("request");
 var cheerio = require("cheerio");
 var db = require("../models");
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapenews";
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+//mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 router.get("/api/scrape", function (req, res) {
   var results = [];
