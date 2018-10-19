@@ -17,12 +17,13 @@ app.use(express.static("public"));
 
 
 // Routes
-
-
 var routes = require("./routes/html-routes");
-var scraproutes = require("./routes/scrape-routes");
+var articleroutes = require("./routes/article-route");
+var noteroutes = require("./routes/note-routes");
 app.use(routes);
-app.use(scraproutes);
+
+app.use(articleroutes);
+app.use(noteroutes);
 
 // Start the server
 app.listen(PORT, function () {

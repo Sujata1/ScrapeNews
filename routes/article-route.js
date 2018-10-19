@@ -77,18 +77,17 @@ router.get("/articles/:id", function (req, res) {
     });
 });
 
-router.get("/api/notes/:id", function (req, res) {
-  db.Article.findOne({ _id: req.params.id })
-    .populate("note")
-    .then(function (dbArticle) {
 
-      res.json(dbArticle);
+router.post('/api/deleteArticle', (req,res)=>{
+  db.Article.findOneAndUpdate({ link: req.body.link }, { $set: { "saved": req.body.saved } })
+    .then(function (dbArticle) {
+      res.redirect("/savedarticles");
     })
     .catch(function (err) {
-      // If an error occurs, send it back to the client
       res.json(err);
     });
 });
+
 
 router.post("/api/savearticle", function (req, res) {
   db.Article.findOneAndUpdate({ link: req.body.link }, { $set: { "saved": req.body.saved } })
@@ -99,6 +98,7 @@ router.post("/api/savearticle", function (req, res) {
       res.json(err);
     });
 });
+
 
 router.get("/api/clear/notSaved", function (req, res) {
   console.log("enter clear all");
@@ -112,7 +112,7 @@ router.get("/api/clear/saved", function (req, res) {
   console.log("enter clear saved");
   db.Article.updateMany({ saved: true }, { $set: { "saved": false } })
     .then(function (dbArticle) {
-      res.redirect('/');
+       res.redirect('/');
     })
 });
 

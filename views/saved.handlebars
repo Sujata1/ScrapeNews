@@ -1,6 +1,7 @@
- <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="http://nyt-mongo-scraper.herokuapp.com/">Mongo Scraper</a>
-  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
+    aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -33,19 +34,19 @@
   </div>
 </div>
 <div class="container-fluid article-container">
-    {{#if articles}} {{#each articles}}
-    <div data-_id={{this._id}} data-link={{this.link}} class="card">
-        <div class="card-header">
-            <h3>
-                <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
-                  <a class="btn btn-danger delete">Delete From Saved</a>
-                  <a class="btn btn-info notes">Article Notes</a>
-            </h3>
-        </div>
-        <div class="card-body">{{this.title}}</div>
+  {{#if articles}} {{#each articles}}
+  <div data-_id={{this._id}} data-link={{this.link}} class="card">
+    <div class="card-header">
+      <h3>
+        <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
+        <a class="btn btn-danger deleteArticle" data-id="{{this._id}}">Delete From Saved</a>
+        <a class="addNote btn btn-info " data-id="{{this._id}}">Article Notes</a>
+      </h3>
     </div>
-
-    {{/each}}{{else}}
+    <div class="card-body">{{this.title}}</div>
+  </div>
+</div>
+{{/each}}{{else}}
 <div class='alert alert-warning text-center'>
   <h4>Uh Oh. Looks like we don't have any saved articles.</h4>
 </div>
@@ -55,29 +56,38 @@
   </div>
   <div class='card-body text-center'>
     <h4><a class='scrape-new' href='/'>Home?</a></h4>
-    {{!-- <h4><a href='/saved'>Go to Saved Articles</a></h4>
+    {{!--
+    <h4><a href='/saved'>Go to Saved Articles</a></h4>
   </div> --}}
 </div>
-{{/if}}
-</div>
-  {{!-- <div class="bootbox modal fade show" tabindex="-1" role="dialog" style="display: block;">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-          <div class="bootbox-body">
-            <div class="container-fluid text-center">
-            
+{{/if}} {{!-- modal for displaying and creating notes --}}
+<div id="noteModal" class="modal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        {{!-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
+        <div>
+          <div class="container-fluid text-center">
+            <h4 class="">Add a note</h4>
+            <button type="button" class="closeModel" data-dismiss="modal" style="margin-top: -30px;">×</button>
+
+            <div class="modal-body">
+              <input type="text" id="noteBodyEntry" class="noteInput" placeholder="Enter Note" value="">
+              <div id="noteArea"></div>
+            </div>
+            <div class="modal-footer">
+              <h5 class="instructions">Enter Note and Click Save button, or , push (X) to delete</h5>
+              <button type="button" id="submitNote">Save Note</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div> --}}
-<footer class="footer">
-    <div class="container">
-        <p>New York Times Mongo Scraper</p>
-    </div>
-</footer>
+</div>
 
- 
+<footer class="footer">
+  <div class="container">
+    <p>New York Times Mongo Scraper</p>
+  </div>
+</footer>
